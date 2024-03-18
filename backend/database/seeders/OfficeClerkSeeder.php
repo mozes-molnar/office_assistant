@@ -13,7 +13,7 @@ class OfficeClerkSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('office_clerk')->insert([
+        DB::table('office_clerks')->insert([
             [
                 'name' => 'John Doe',
                 'email' => 'john@example.com',
