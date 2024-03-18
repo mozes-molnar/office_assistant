@@ -1,11 +1,9 @@
 <script setup>
-import Navigation from './components/Navigation.vue'
 
 </script>
 
 <template>
-  <Navigation />
-
+<h1>Task</h1>
 </template>
 
 <style scoped>
