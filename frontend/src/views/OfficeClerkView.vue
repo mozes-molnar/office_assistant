@@ -17,10 +17,11 @@ function openCreateUserModal() {
     Új ügyintéző létrehozása
   </button>
   <CreateUserModal />
-  <UserTable />
 
+  <UserTable />
 </template>
 
 <style scoped>
 
 </style>
+
