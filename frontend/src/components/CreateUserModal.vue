@@ -1,5 +1,5 @@
 <script setup>
-import { ref,onMounted } from "vue";
+import { ref, defineExpose } from "vue";
 import axios from "axios";
 
 let name = ref("");
@@ -34,11 +34,9 @@ function closeModal() {
   document.querySelector(".modal").style.display = "none";
 }
 
-
 defineExpose({
     openModal
 })
-
 </script>
 
 

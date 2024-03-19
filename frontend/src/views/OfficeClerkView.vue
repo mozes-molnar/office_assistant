@@ -6,18 +6,16 @@ import { ref } from "vue";
 const createUserModalRef = ref(null);
 
 function openCreateUserModal() {
-        createUserModalRef.value.openModal();
-    }
-
+  createUserModalRef.value.openModal();
+}
 </script>
 
 <template>
-<h1>OfficeClerk</h1>
-<button type="button" class="btn btn-primary m-3" @click="openCreateUserModal">
+  <h1>OfficeClerk</h1>
+  <a class="btn btn-primary m-3" @click="openCreateUserModal">
     Új ügyintéző létrehozása
-  </button>
-  <CreateUserModal />
-
+  </a>
+  <CreateUserModal ref="createUserModalRef" />
   <UserTable />
 </template>
 
