@@ -19,7 +19,7 @@ export default {
   methods: {
     async fetchUsers() {
       await axios
-        .get(import.meta.env.VITE_API_URL + "/office_clerk")
+        .get(`${import.meta.env.VITE_API_URL}/office_clerk`)
         .then((response) => {
           console.log(response);
           this.users = response.data;
