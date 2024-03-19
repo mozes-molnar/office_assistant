@@ -1,6 +1,6 @@
 <script setup>
-import CreateUserModal from '../components/CreateUserModal.vue';
-import UserTable from '../components/UserTable.vue';
+import CreateUserModal from "../components/CreateUserModal.vue";
+import UserTable from "../components/UserTable.vue";
 import { ref } from "vue";
 
 const createUserModalRef = ref(null);
@@ -20,6 +20,5 @@ function openCreateUserModal() {
 </template>
 
 <style scoped>
-
 </style>
 

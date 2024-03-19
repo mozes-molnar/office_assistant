@@ -7,7 +7,6 @@ let email = ref("");
 let description = ref("");
 let createdAt = new Date();
 
-
 async function submitForm(event) {
   try {
     const response = await axios.post(
@@ -35,8 +34,8 @@ function closeModal() {
 }
 
 defineExpose({
-    openModal
-})
+  openModal,
+});
 </script>
 
 

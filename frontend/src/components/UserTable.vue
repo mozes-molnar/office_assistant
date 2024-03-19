@@ -18,17 +18,17 @@ export default {
   },
   methods: {
     async fetchUsers() {
-        await axios.get(
-          import.meta.env.VITE_API_URL + "/office_clerk"
-        ).then(response => {
-            console.log(response);
-            this.users = response.data
+      await axios
+        .get(import.meta.env.VITE_API_URL + "/office_clerk")
+        .then((response) => {
+          console.log(response);
+          this.users = response.data;
         })
-        .catch(err =>   console.error("Hiba történt az ügyintézők betöltésekor:", error));
+        .catch((err) =>
+          console.error("Hiba történt az ügyintézők betöltésekor:", err)
+        );
     },
-    async editUser(user) {
-
-    },
+    async editUser(user) {},
     async deleteUser(user) {
       const confirmation = confirm(
         "Biztosan törölni szeretné ezt az ügyintézőt?"
@@ -44,7 +44,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <template>
