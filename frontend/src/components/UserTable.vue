@@ -35,7 +35,7 @@ export default {
       );
       if (confirmation) {
         try {
-          await axios.delete(`http://localhost:3000/office_clerk/${user.id}`);
+          await axios.delete(`${import.meta.env.VITE_API_URL}/office_clerk/${user.id}`);
           this.users = this.users.filter((u) => u.id !== user.id);
         } catch (error) {
           console.error("Hiba történt az ügyintéző törlésekor:", error);

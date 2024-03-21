@@ -2,20 +2,18 @@
 import { ref, defineExpose } from "vue";
 import axios from "axios";
 
-let name = ref("");
-let email = ref("");
-let description = ref("");
-let createdAt = new Date();
+const name = ref("");
+const email = ref("");
+const description = ref("");
 
 async function submitForm(event) {
   try {
     const response = await axios.post(
-      import.meta.env.VITE_API_URL + "/office_clerk",
+      `${import.meta.env.VITE_API_URL}/office_clerk`,
       {
         name: name.value,
         email: email.value,
         description: description.value,
-        created_at: createdAt,
       }
     );
 
