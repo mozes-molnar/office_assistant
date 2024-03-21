@@ -73,7 +73,10 @@ onMounted(async () => {
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Új feladat létrehozása</h5>
+          <h5 class="modal-title">
+            <span v-if="editedTaskId === ''">Új feladat létrehozása</span>
+            <span v-else>Feladat módosítása</span>
+          </h5>
           <button
             type="button"
             class="close"
@@ -87,7 +90,7 @@ onMounted(async () => {
         <div class="modal-body">
           <form @submit="submitForm">
             <div class="form-group">
-              <label for="officeClerk">Ügyintéző neve:</label>
+              <label>Ügyintéző neve:</label>
               <select class="form-control" v-model="officeClerkId" required>
                 <option
                   v-for="clerk in officeClerks"
@@ -99,8 +102,8 @@ onMounted(async () => {
               </select>
             </div>
             <div class="form-group">
-              <label for="description">Leírás:</label>
-              <input
+              <label>Leírás:</label>
+              <textarea
                 type="text"
                 class="form-control"
                 v-model="description"

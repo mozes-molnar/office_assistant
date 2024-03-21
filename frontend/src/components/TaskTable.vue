@@ -6,8 +6,6 @@ import CreateTaskModal from "./CreateTaskModal.vue";
 const emit = defineEmits(["edit-task"]);
 const tasks = ref([]);
 const officeClerks = ref([]);
-const isEditModalVisible = ref(false);
-const selectedTask = ref(null);
 
 const fetchTasksAndOfficeClerks = async () => {
   try {

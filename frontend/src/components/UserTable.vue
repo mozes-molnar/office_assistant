@@ -1,12 +1,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import CreateUserModal from "./CreateUserModal.vue";
 
-const emit = defineEmits(["create-task"]);
+const emit = defineEmits(["create-task", "edit-user"]);
 const users = ref([]);
-const isEditModalVisible = ref(false);
-const selectedUser = ref(null);
 
 const fetchUsers = async () => {
   try {
@@ -25,8 +22,7 @@ const createNewTask = (user) => {
 };
 
 const editUser = async (user) => {
-  selectedUser.value = user;
-  isEditModalVisible.value = true;
+  emit("edit-user", user);
 };
 
 const deleteUser = async (user) => {
@@ -47,7 +43,6 @@ onMounted(fetchUsers);
 </script>
 
 <template>
-  <CreateUserModal v-if="isEditModalVisible" :selected-user="selectedUser" />
   <div>
     <table class="table table-striped">
       <thead>
@@ -68,10 +63,10 @@ onMounted(fetchUsers);
           <td>{{ user.created_at }}</td>
           <td>{{ user.description }}</td>
           <td>
-            <a class="btn btn-warning" @click="createNewTask(user)"
+            <a class="btn btn-info" @click="createNewTask(user)"
               >Új feladat</a
             >
-            <a class="btn btn-warning" @click="editUser(user)">Szerkesztés</a>
+            <a class="btn btn-warning ms-2" @click="editUser(user)">Szerkesztés</a>
             <a class="btn btn-danger ms-2" @click="deleteUser(user)">Törlés</a>
           </td>
         </tr>

@@ -1,13 +1,18 @@
 <script setup>
-import { ref, defineExpose } from "vue";
+import { ref, defineExpose, onMounted } from "vue";
 import axios from "axios";
 
 const name = ref("");
 const email = ref("");
 const description = ref("");
+const editedUserId = ref("");
+
+const props = defineProps({
+  user_id: String,
+});
 
 async function submitForm(event) {
-  try {
+  if (editedUserId.value === "") {
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/office_clerk`,
       {
@@ -16,18 +21,43 @@ async function submitForm(event) {
         description: description.value,
       }
     );
-
-    closeModal();
-  } catch (error) {
-    console.error("Hiba történt:", error);
+  } else {
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}/office_clerk/${editedUserId.value}`,
+      {
+        name: name.value,
+        email: email.value,
+        description: description.value,
+      }
+    );
   }
+  closeModal();
 }
 
-function openModal() {
+async function getUserDataById(id) {
+  axios
+    .get(`${import.meta.env.VITE_API_URL}/office_clerk/${id}`)
+    .then((result) => {
+      name.value = result.data.name;
+      email.value = result.data.email;
+      description.value = result.data.description;
+    });
+}
+
+function openModal(id = null) {
+  if (id !== null) {
+    console.log(editedUserId.value);
+    editedUserId.value = id;
+    getUserDataById(id);
+  }
   document.querySelector(".modal").style.display = "block";
 }
 
 function closeModal() {
+  name.value = "";
+  email.value = "";
+  description.value = "";
+  editedUserId.value = "";
   document.querySelector(".modal").style.display = "none";
 }
 
@@ -42,7 +72,10 @@ defineExpose({
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Új ügyintéző létrehozása</h5>
+          <h5 class="modal-title">
+            <span v-if="editedUserId === ''">Új ügyintéző létrehozása</span>
+            <span v-else>Ügyintéző módosítása</span>
+          </h5>
           <button
             type="button"
             class="close"
@@ -56,11 +89,11 @@ defineExpose({
         <div class="modal-body">
           <form @submit="submitForm">
             <div class="form-group">
-              <label for="name">Név:</label>
+              <label>Név:</label>
               <input type="text" class="form-control" v-model="name" required />
             </div>
             <div class="form-group">
-              <label for="email">Email:</label>
+              <label>Email:</label>
               <input
                 type="email"
                 class="form-control"
@@ -69,14 +102,17 @@ defineExpose({
               />
             </div>
             <div class="form-group">
-              <label for="description">Leírás:</label>
+              <label>Leírás:</label>
               <textarea
                 class="form-control"
                 v-model="description"
                 rows="3"
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Létrehozás</button>
+            <button type="submit" class="btn btn-primary">
+              <span v-if="editedUserId === ''">Létrehozás</span>
+              <span v-else>Módosítás</span>
+            </button>
           </form>
         </div>
       </div>
