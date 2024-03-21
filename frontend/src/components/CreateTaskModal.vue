@@ -5,25 +5,50 @@ import axios from "axios";
 const officeClerkId = ref("");
 const description = ref("");
 const officeClerks = ref([]);
+const editedTaskId = ref("");
+
+const props = defineProps({
+  task_id: String,
+});
 
 async function submitForm(event) {
-  try {
+  if (editedTaskId.value === "") {
     const response = await axios.post(`${import.meta.env.VITE_API_URL}/tasks`, {
       office_clerk_id: officeClerkId.value,
       description: description.value,
     });
-
-    closeModal();
-  } catch (error) {
-    console.error("Hiba történt:", error);
+  } else {
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}/tasks/${editedTaskId.value}`,
+      {
+        office_clerk_id: officeClerkId.value,
+        description: description.value,
+      }
+    );
   }
+
+  closeModal();
 }
 
-function openModal() {
+async function getTaskDataById(id) {
+  axios.get(`${import.meta.env.VITE_API_URL}/tasks/${id}`).then((result) => {
+    officeClerkId.value = result.data.office_clerk_id;
+    description.value = result.data.description;
+  });
+}
+
+function openModal(id = null) {
+  if (id !== null) {
+    editedTaskId.value = id;
+    getTaskDataById(id);
+  }
   document.querySelector(".modal").style.display = "block";
 }
 
 function closeModal() {
+  officeClerkId.value = "";
+  description.value = "";
+  editedTaskId.value = "";
   document.querySelector(".modal").style.display = "none";
 }
 
@@ -33,7 +58,9 @@ defineExpose({
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/office_clerk`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/office_clerk`
+    );
     officeClerks.value = response.data;
   } catch (error) {
     console.error("Hiba történt az ügyintézők lekérdezésekor:", error);
@@ -62,7 +89,13 @@ onMounted(async () => {
             <div class="form-group">
               <label for="officeClerk">Ügyintéző neve:</label>
               <select class="form-control" v-model="officeClerkId" required>
-                <option v-for="clerk in officeClerks" :key="clerk.id" :value="clerk.id">{{ clerk.name }}</option>
+                <option
+                  v-for="clerk in officeClerks"
+                  :key="clerk.id"
+                  :value="clerk.id"
+                >
+                  {{ clerk.name }}
+                </option>
               </select>
             </div>
             <div class="form-group">
@@ -74,7 +107,10 @@ onMounted(async () => {
                 required
               />
             </div>
-            <button type="submit" class="btn btn-primary">Létrehozás</button>
+            <button type="submit" class="btn btn-primary">
+              <span v-if="editedTaskId === ''">Létrehozás</span>
+              <span v-else>Módosítás</span>
+            </button>
           </form>
         </div>
       </div>

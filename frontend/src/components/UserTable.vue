@@ -1,52 +1,53 @@
-<script>
+<script setup>
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import CreateUserModal from "./CreateUserModal.vue";
 
-export default {
-  components: {
-    CreateUserModal,
-  },
-  data() {
-    return {
-      users: [],
-      isEditModalVisible: false,
-      selectedUser: null,
-    };
-  },
-  mounted() {
-    this.fetchUsers();
-  },
-  methods: {
-    async fetchUsers() {
-      await axios
-        .get(`${import.meta.env.VITE_API_URL}/office_clerk`)
-        .then((response) => {
-          console.log(response);
-          this.users = response.data;
-        })
-        .catch((err) =>
-          console.error("Hiba történt az ügyintézők betöltésekor:", err)
-        );
-    },
-    async editUser(user) {},
-    async deleteUser(user) {
-      const confirmation = confirm(
-        "Biztosan törölni szeretné ezt az ügyintézőt?"
-      );
-      if (confirmation) {
-        try {
-          await axios.delete(`${import.meta.env.VITE_API_URL}/office_clerk/${user.id}`);
-          this.users = this.users.filter((u) => u.id !== user.id);
-        } catch (error) {
-          console.error("Hiba történt az ügyintéző törlésekor:", error);
-        }
-      }
-    },
-  },
+const emit = defineEmits(["create-task"]);
+const users = ref([]);
+const isEditModalVisible = ref(false);
+const selectedUser = ref(null);
+
+const fetchUsers = async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/office_clerk`
+    );
+    console.log(response);
+    users.value = response.data;
+  } catch (err) {
+    console.error("Hiba történt az ügyintézők betöltésekor:", err);
+  }
 };
+
+const createNewTask = (user) => {
+  emit("create-task", user);
+};
+
+const editUser = async (user) => {
+  selectedUser.value = user;
+  isEditModalVisible.value = true;
+};
+
+const deleteUser = async (user) => {
+  const confirmation = confirm("Biztosan törölni szeretné ezt az ügyintézőt?");
+  if (confirmation) {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/office_clerk/${user.id}`
+      );
+      users.value = users.value.filter((u) => u.id !== user.id);
+    } catch (error) {
+      console.error("Hiba történt az ügyintéző törlésekor:", error);
+    }
+  }
+};
+
+onMounted(fetchUsers);
 </script>
 
 <template>
+  <CreateUserModal v-if="isEditModalVisible" :selected-user="selectedUser" />
   <div>
     <table class="table table-striped">
       <thead>
@@ -67,6 +68,9 @@ export default {
           <td>{{ user.created_at }}</td>
           <td>{{ user.description }}</td>
           <td>
+            <a class="btn btn-warning" @click="createNewTask(user)"
+              >Új feladat</a
+            >
             <a class="btn btn-warning" @click="editUser(user)">Szerkesztés</a>
             <a class="btn btn-danger ms-2" @click="deleteUser(user)">Törlés</a>
           </td>
@@ -75,6 +79,3 @@ export default {
     </table>
   </div>
 </template>
-
-<style scoped>
-</style>

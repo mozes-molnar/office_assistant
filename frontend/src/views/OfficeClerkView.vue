@@ -1,12 +1,18 @@
 <script setup>
 import CreateUserModal from "../components/CreateUserModal.vue";
+import CreateTaskModal from "../components/CreateTaskModal.vue";
 import UserTable from "../components/UserTable.vue";
 import { ref } from "vue";
 
 const createUserModalRef = ref(null);
+const createTaskModalRef = ref(null);
 
 function openCreateUserModal() {
   createUserModalRef.value.openModal();
+}
+
+function createTask(user) {
+  createTaskModalRef.value.openModal();
 }
 </script>
 
@@ -15,10 +21,9 @@ function openCreateUserModal() {
   <a class="btn btn-primary m-3" @click="openCreateUserModal">
     Új ügyintéző létrehozása
   </a>
+  <!-- <CreateTaskModal ref="createTaskModalRef" /> -->
   <CreateUserModal ref="createUserModalRef" />
-  <UserTable />
+  <UserTable @create-task="createTask" />
 </template>
 
-<style scoped>
-</style>
-
+<style scoped></style>

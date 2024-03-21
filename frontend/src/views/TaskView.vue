@@ -8,6 +8,10 @@ const createTaskModalRef = ref(null);
 function openCreateUserModal() {
   createTaskModalRef.value.openModal();
 }
+
+function editTask(task) {
+  createTaskModalRef.value.openModal(task.id);
+}
 </script>
 
 <template>
@@ -16,8 +20,7 @@ function openCreateUserModal() {
     Új feladat létrehozása
   </a>
   <CreateTaskModal ref="createTaskModalRef" />
-  <TaskTable />
+  <TaskTable @edit-task="editTask" />
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
