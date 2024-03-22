@@ -47,11 +47,11 @@ onMounted(fetchUsers);
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Ügyintéző neve</th>
-          <th>Ügyintéző email</th>
-          <th>Létrehozás dátuma</th>
-          <th>Leírás</th>
-          <th>Actions</th>
+          <th style="width: 20%">Ügyintéző neve</th>
+          <th style="width: 10%">Ügyintéző email</th>
+          <th style="width: 15%">Létrehozás dátuma</th>
+          <th style="width: 25%">Leírás</th>
+          <th style="width: 30%">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -63,10 +63,10 @@ onMounted(fetchUsers);
           <td>{{ user.created_at }}</td>
           <td>{{ user.description }}</td>
           <td>
-            <a class="btn btn-info" @click="createNewTask(user)"
-              >Új feladat</a
+            <a class="btn btn-info" @click="createNewTask(user)">Új feladat</a>
+            <a class="btn btn-warning ms-2" @click="editUser(user)"
+              >Szerkesztés</a
             >
-            <a class="btn btn-warning ms-2" @click="editUser(user)">Szerkesztés</a>
             <a class="btn btn-danger ms-2" @click="deleteUser(user)">Törlés</a>
           </td>
         </tr>

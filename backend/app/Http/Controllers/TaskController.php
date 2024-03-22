@@ -28,11 +28,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        Task::create([
-            "office_clerk_id" => $request->office_clerk_id,
-            "description" => $request->description,
+        $taskData = $request->validate([
+            'office_clerk_id' => 'required|exists:office_clerks,id',
+            'description' => 'required|string',
         ]);
+
+        Task::create($taskData);
     }
+
 
     /**
      * Display the specified resource.
@@ -55,11 +58,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Task::where("id", $id)->update([
-            "office_clerk_id" => $request->office_clerk_id,
-            "description" => $request->description,
+        $taskData = $request->validate([
+            'office_clerk_id' => 'required|exists:office_clerks,id',
+            'description' => 'required|string',
         ]);
+
+        Task::where("id", $id)->update($taskData);
     }
+
 
     /**
      * Remove the specified resource from storage.

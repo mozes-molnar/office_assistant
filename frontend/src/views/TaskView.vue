@@ -15,12 +15,14 @@ function editTask(task) {
 </script>
 
 <template>
-  <h1>Task</h1>
-  <a class="btn btn-primary m-3" @click="openCreateUserModal">
-    Új feladat létrehozása
-  </a>
-  <CreateTaskModal ref="createTaskModalRef" />
-  <TaskTable @edit-task="editTask" />
+    <div class="d-flex justify-content-center">
+      <h1 class="mt-3">Feladatok kezelése</h1>
+    </div>
+    <a class="btn btn-primary m-3" @click="openCreateUserModal">
+      Új feladat létrehozása
+    </a>
+    <CreateTaskModal ref="createTaskModalRef" />
+    <TaskTable @edit-task="editTask" />
 </template>
 
 <style scoped></style>

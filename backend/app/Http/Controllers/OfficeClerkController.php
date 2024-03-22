@@ -31,12 +31,15 @@ class OfficeClerkController extends Controller
      */
     public function store(Request $request)
     {
-        OfficeClerk::create([
-            "name" => $request->name,
-            "email" => $request->email,
-            "description" => $request->description,
+        $userData = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|email|unique:office_clerks|max:255',
+            'description' => 'required|string',
         ]);
+
+        OfficeClerk::create($userData);
     }
+
 
     /**
      * Display the specified resource.
@@ -59,12 +62,15 @@ class OfficeClerkController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        OfficeClerk::where("id", $id)->update([
-            "name" => $request->name,
-            "email" => $request->email,
-            "description" => $request->description,
+        $userData = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|email|max:255|unique:office_clerks,email,' . $id,
+            'description' => 'required|string',
         ]);
+
+        OfficeClerk::where("id", $id)->update($userData);
     }
+
 
     /**
      * Remove the specified resource from storage.

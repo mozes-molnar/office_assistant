@@ -14,7 +14,7 @@ import { RouterLink } from "vue-router";
             >
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/task">Feladatok</RouterLink>
+            <RouterLink class="nav-link" to="/tasks">Feladatok</RouterLink>
           </li>
         </ul>
       </div>

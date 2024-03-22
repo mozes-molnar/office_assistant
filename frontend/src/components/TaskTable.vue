@@ -61,9 +61,9 @@ fetchTasksAndOfficeClerks();
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Ügyintéző neve</th>
-        <th>Leírás</th>
-        <th>Műveletek</th>
+        <th style="width: 30%">Ügyintéző neve</th>
+        <th style="width: 50%">Leírás</th>
+        <th style="width: 20%">Műveletek</th>
       </tr>
     </thead>
     <tbody>

@@ -10,5 +10,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::resource('/office_clerk', OfficeClerkController::class);
-Route::resource('/task', TaskController::class);
+Route::resource('/tasks', TaskController::class);
 

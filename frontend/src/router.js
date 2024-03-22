@@ -7,7 +7,7 @@ import TasksView from './views/TaskView.vue';
 const routes = [
   { path: '/', component: HomeView,},
   { path: '/office_clerk', component: OfficeClerksView,},
-  { path: '/task', component: TasksView,},
+  { path: '/tasks', component: TasksView,},
 ];
 
 const router = createRouter({
