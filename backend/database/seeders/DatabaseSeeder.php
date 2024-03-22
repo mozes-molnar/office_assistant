@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\OfficeClerk;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Task;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +21,9 @@ class DatabaseSeeder extends Seeder
             OfficeClerkSeeder::class,
             TaskSeeder::class,
         ]);
+
+        OfficeClerk::factory(100)->create();
+        Task::factory(50)->create();
 
         User::factory()->create([
             'name' => 'Test User',
