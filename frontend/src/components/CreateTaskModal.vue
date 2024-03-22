@@ -42,14 +42,14 @@ function openModal(id = null) {
     editedTaskId.value = id;
     getTaskDataById(id);
   }
-  document.querySelector(".modal").style.display = "block";
+  document.querySelector("#modal1").style.display = "block";
 }
 
 function closeModal() {
   officeClerkId.value = "";
   description.value = "";
   editedTaskId.value = "";
-  document.querySelector(".modal").style.display = "none";
+  document.querySelector("#modal1").style.display = "none";
 }
 
 defineExpose({
@@ -69,7 +69,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="modal" tabindex="-1" role="dialog" style="display: none">
+  <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    style="display: none"
+    id="modal1"
+  >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

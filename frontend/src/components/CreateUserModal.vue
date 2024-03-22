@@ -50,7 +50,7 @@ function openModal(id = null) {
     editedUserId.value = id;
     getUserDataById(id);
   }
-  document.querySelector(".modal").style.display = "block";
+  document.querySelector("#modal2").style.display = "block";
 }
 
 function closeModal() {
@@ -58,7 +58,7 @@ function closeModal() {
   email.value = "";
   description.value = "";
   editedUserId.value = "";
-  document.querySelector(".modal").style.display = "none";
+  document.querySelector("#modal2").style.display = "none";
 }
 
 defineExpose({
@@ -68,7 +68,13 @@ defineExpose({
 
 
 <template>
-  <div class="modal" tabindex="-1" role="dialog" style="display: none">
+  <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    style="display: none"
+    id="modal2"
+  >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
