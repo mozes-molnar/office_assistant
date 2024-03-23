@@ -66,7 +66,7 @@ defineExpose({
 </script>
 
 <template>
-  <table class="table table-striped">
+  <table class="table table-striped height">
     <thead>
       <tr>
         <th style="width: 30%">Ügyintéző neve</th>
@@ -87,4 +87,8 @@ defineExpose({
   </table>
 </template>
 
-<style scoped></style>
+<style scoped>
+.height {
+  min-height: 528px;
+}
+</style>

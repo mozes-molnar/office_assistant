@@ -26,7 +26,9 @@ const editUser = async (user) => {
 };
 
 const deleteUser = async (user) => {
-  const confirmation = confirm("Biztosan törölni szeretné ezt az ügyintézőt?");
+  const confirmation = confirm(
+    "Amennyiben az ügyintézőt törli, a rendszer automatikusan törli az általa végzett feladatokat is. Biztosan ezt szeretné?"
+  );
   if (confirmation) {
     try {
       await axios.delete(
@@ -48,14 +50,14 @@ defineExpose({
 
 <template>
   <div>
-    <table class="table table-striped">
+    <table class="table table-striped height">
       <thead>
         <tr>
           <th style="width: 20%">Ügyintéző neve</th>
           <th style="width: 10%">Ügyintéző email</th>
           <th style="width: 15%">Létrehozás dátuma</th>
           <th style="width: 25%">Leírás</th>
-          <th style="width: 30%">Actions</th>
+          <th style="width: 30%">Műveletek</th>
         </tr>
       </thead>
       <tbody>
@@ -78,3 +80,9 @@ defineExpose({
     </table>
   </div>
 </template>
+
+<style scoped>
+.height {
+  min-height: 528px;
+}
+</style>
