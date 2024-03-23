@@ -33,7 +33,7 @@ class OfficeClerkController extends Controller
     {
         $userData = $request->validate([
             'name' => 'required|string|min:3|max:255',
-            'email' => 'required|email|unique:office_clerks|max:255',
+            'email' => 'required|email|max:255',
             'description' => 'required|string',
         ]);
 

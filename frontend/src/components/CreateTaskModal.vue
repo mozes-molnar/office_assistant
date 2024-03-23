@@ -7,6 +7,7 @@ const description = ref("");
 const officeClerks = ref([]);
 const editedTaskId = ref("");
 const disableSelectBox = ref(false);
+const emit = defineEmits(["created-task"]);
 
 onMounted(async () => {
   try {
@@ -20,6 +21,8 @@ onMounted(async () => {
 });
 
 async function submitForm(event) {
+  event.preventDefault();
+
   if (editedTaskId.value === "") {
     const response = await axios.post(`${import.meta.env.VITE_API_URL}/tasks`, {
       office_clerk_id: officeClerkId.value,
@@ -34,6 +37,12 @@ async function submitForm(event) {
       }
     );
   }
+
+  emit("created-task", {
+    office_clerk_id: officeClerkId.value,
+    description: description.value,
+  });
+
 
   closeModal();
 }

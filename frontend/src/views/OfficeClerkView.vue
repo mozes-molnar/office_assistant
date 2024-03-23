@@ -6,6 +6,7 @@ import { ref } from "vue";
 
 const createUserModalRef = ref(null);
 const createTaskModalRef = ref(null);
+const userTableRef = ref(null);
 
 function editUser(user) {
   createUserModalRef.value.openModal(user.id);
@@ -18,6 +19,11 @@ function openCreateUserModal() {
 function createTask(user) {
   createTaskModalRef.value.openModal("", user.id);
 }
+
+function createdUser(user) {
+  console.log(user);
+  userTableRef.value.fetchUsers();
+}
 </script>
 
 <template>
@@ -27,9 +33,13 @@ function createTask(user) {
   <a class="btn btn-primary m-3" @click="openCreateUserModal">
     Új ügyintéző létrehozása
   </a>
-  <CreateUserModal ref="createUserModalRef" />
+  <CreateUserModal ref="createUserModalRef" @created-user="createdUser" />
   <CreateTaskModal ref="createTaskModalRef" />
-  <UserTable @create-task="createTask" @edit-user="editUser" />
+  <UserTable
+    ref="userTableRef"
+    @create-task="createTask"
+    @edit-user="editUser"
+  />
 </template>
 
 <style scoped></style>

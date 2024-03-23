@@ -40,6 +40,10 @@ const deleteUser = async (user) => {
 };
 
 onMounted(fetchUsers);
+
+defineExpose({
+  fetchUsers,
+});
 </script>
 
 <template>

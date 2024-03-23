@@ -55,6 +55,14 @@ const getOfficeClerkName = (officeClerkId) => {
 };
 
 fetchTasksAndOfficeClerks();
+
+function valami() {
+  console.log("valami");
+}
+
+defineExpose({
+  fetchTasksAndOfficeClerks,
+});
 </script>
 
 <template>

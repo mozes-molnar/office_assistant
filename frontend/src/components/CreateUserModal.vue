@@ -6,12 +6,15 @@ const name = ref("");
 const email = ref("");
 const description = ref("");
 const editedUserId = ref("");
+const emit = defineEmits(["created-user"]);
 
 const props = defineProps({
   user_id: String,
 });
 
 async function submitForm(event) {
+  event.preventDefault();
+
   if (editedUserId.value === "") {
     const response = await axios.post(
       `${import.meta.env.VITE_API_URL}/office_clerk`,
@@ -31,6 +34,12 @@ async function submitForm(event) {
       }
     );
   }
+  emit("created-user", {
+    name: name.value,
+    email: email.value,
+    description: description.value,
+  });
+
   closeModal();
 }
 
@@ -65,7 +74,6 @@ defineExpose({
   openModal,
 });
 </script>
-
 
 <template>
   <div
@@ -125,7 +133,6 @@ defineExpose({
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .modal {
