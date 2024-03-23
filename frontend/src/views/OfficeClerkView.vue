@@ -16,20 +16,20 @@ function openCreateUserModal() {
 }
 
 function createTask(user) {
-  createTaskModalRef.value.openModal();
+  createTaskModalRef.value.openModal("", user.id);
 }
 </script>
 
 <template>
-    <div class="d-flex justify-content-center">
-      <h1 class="mt-3">Ügyintézők kezelése</h1>
-    </div>
-    <a class="btn btn-primary m-3" @click="openCreateUserModal">
-      Új ügyintéző létrehozása
-    </a>
-    <CreateUserModal ref="createUserModalRef" />
-    <CreateTaskModal ref="createTaskModalRef" />
-    <UserTable @create-task="createTask" @edit-user="editUser" />
+  <div class="d-flex justify-content-center">
+    <h1 class="mt-3">Ügyintézők kezelése</h1>
+  </div>
+  <a class="btn btn-primary m-3" @click="openCreateUserModal">
+    Új ügyintéző létrehozása
+  </a>
+  <CreateUserModal ref="createUserModalRef" />
+  <CreateTaskModal ref="createTaskModalRef" />
+  <UserTable @create-task="createTask" @edit-user="editUser" />
 </template>
 
 <style scoped></style>

@@ -6,9 +6,17 @@ const officeClerkId = ref("");
 const description = ref("");
 const officeClerks = ref([]);
 const editedTaskId = ref("");
+const disableSelectBox = ref(false);
 
-const props = defineProps({
-  task_id: String,
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/office_clerk`
+    );
+    officeClerks.value = response.data;
+  } catch (error) {
+    console.error("Hiba történt az ügyintézők lekérdezésekor:", error);
+  }
 });
 
 async function submitForm(event) {
@@ -37,10 +45,13 @@ async function getTaskDataById(id) {
   });
 }
 
-function openModal(id = null) {
-  if (id !== null) {
-    editedTaskId.value = id;
+function openModal(id = null, assignedUserId = null) {
+  editedTaskId.value = id ?? "";
+  if (id) {
     getTaskDataById(id);
+  } else if (assignedUserId !== null) {
+    officeClerkId.value = assignedUserId;
+    disableSelectBox.value = true;
   }
   document.querySelector("#modal1").style.display = "block";
 }
@@ -49,22 +60,12 @@ function closeModal() {
   officeClerkId.value = "";
   description.value = "";
   editedTaskId.value = "";
+  disableSelectBox.value = false;
   document.querySelector("#modal1").style.display = "none";
 }
 
 defineExpose({
   openModal,
-});
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/office_clerk`
-    );
-    officeClerks.value = response.data;
-  } catch (error) {
-    console.error("Hiba történt az ügyintézők lekérdezésekor:", error);
-  }
 });
 </script>
 
@@ -97,7 +98,12 @@ onMounted(async () => {
           <form @submit="submitForm">
             <div class="form-group">
               <label>Ügyintéző neve:</label>
-              <select class="form-control" v-model="officeClerkId" required>
+              <select
+                class="form-control"
+                v-model="officeClerkId"
+                required
+                :disabled="disableSelectBox"
+              >
                 <option
                   v-for="clerk in officeClerks"
                   :key="clerk.id"
