@@ -46,7 +46,7 @@ class OfficeClerkController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return OfficeClerk::find($id);
     }
 
     /**
