@@ -21,7 +21,6 @@ function createTask(user) {
 }
 
 function createdUser(user) {
-  console.log(user);
   userTableRef.value.fetchUsers();
 }
 </script>

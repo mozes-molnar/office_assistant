@@ -10,7 +10,6 @@ const fetchUsers = async () => {
     const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/office_clerk`
     );
-    console.log(response);
     users.value = response.data;
   } catch (err) {
     console.error("Hiba történt az ügyintézők betöltésekor:", err);

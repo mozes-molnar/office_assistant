@@ -55,7 +55,6 @@ async function getUserDataById(id) {
 
 function openModal(id = null) {
   if (id !== null) {
-    console.log(editedUserId.value);
     editedUserId.value = id;
     getUserDataById(id);
   }

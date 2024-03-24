@@ -22,7 +22,7 @@ import { RouterLink } from "vue-router";
           >
         </li>
       </ul>
-      <p class="text-center text-muted">© 2022 Company, Inc</p>
+      <p class="text-center text-muted">© 2024 Molnár Márkó</p>
     </footer>
   </div>
 </template>
