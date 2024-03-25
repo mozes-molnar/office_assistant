@@ -5,7 +5,7 @@ import { RouterLink } from "vue-router";
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <RouterLink class="navbar-brand" to="/">HW-Studio</RouterLink>
+      <RouterLink class="navbar-brand" to="/">HW Stúdió</RouterLink>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -23,5 +23,4 @@ import { RouterLink } from "vue-router";
   <router-view></router-view>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

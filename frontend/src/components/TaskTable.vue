@@ -66,25 +66,27 @@ defineExpose({
 </script>
 
 <template>
-  <table class="table table-striped height">
-    <thead>
-      <tr>
-        <th style="width: 30%">Ügyintéző neve</th>
-        <th style="width: 50%">Leírás</th>
-        <th style="width: 20%">Műveletek</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(task, index) in tasks" :key="index">
-        <td>{{ getOfficeClerkName(task.office_clerk_id) }}</td>
-        <td>{{ task.description }}</td>
-        <td>
-          <a class="btn btn-warning" @click="editTask(task)">Szerkesztés</a>
-          <a class="btn btn-danger ms-2" @click="deleteTask(task)">Törlés</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container-fluid">
+    <table class="table table-striped height border">
+      <thead>
+        <tr>
+          <th style="width: 30%">Ügyintéző neve</th>
+          <th style="width: 50%">Leírás</th>
+          <th style="width: 20%">Műveletek</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(task, index) in tasks" :key="index">
+          <td>{{ getOfficeClerkName(task.office_clerk_id) }}</td>
+          <td>{{ task.description }}</td>
+          <td>
+            <a class="btn btn-warning" @click="editTask(task)">Szerkesztés</a>
+            <a class="btn btn-danger ms-2" @click="deleteTask(task)">Törlés</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style scoped>

@@ -48,8 +48,8 @@ defineExpose({
 </script>
 
 <template>
-  <div>
-    <table class="table table-striped height">
+  <div class="container-fluid">
+    <table class="table table-striped height border">
       <thead>
         <tr>
           <th style="width: 20%">Ügyintéző neve</th>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineExpose, onMounted } from "vue";
+import { ref, defineExpose, onMounted, onUpdated } from "vue";
 import axios from "axios";
 
 const officeClerkId = ref("");
@@ -10,6 +10,10 @@ const disableSelectBox = ref(false);
 const emit = defineEmits(["created-task"]);
 
 onMounted(async () => {
+  fetchUsers();
+});
+
+async function fetchUsers() {
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/office_clerk`
@@ -18,7 +22,7 @@ onMounted(async () => {
   } catch (error) {
     console.error("Hiba történt az ügyintézők lekérdezésekor:", error);
   }
-});
+}
 
 async function submitForm(event) {
   event.preventDefault();
@@ -43,7 +47,6 @@ async function submitForm(event) {
     description: description.value,
   });
 
-
   closeModal();
 }
 
@@ -55,6 +58,7 @@ async function getTaskDataById(id) {
 }
 
 function openModal(id = null, assignedUserId = null) {
+  fetchUsers();
   editedTaskId.value = id ?? "";
   if (id) {
     getTaskDataById(id);
