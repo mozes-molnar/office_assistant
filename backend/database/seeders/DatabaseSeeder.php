@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             TaskSeeder::class,
         ]);
 
-        OfficeClerk::factory(100)->create();
-        Task::factory(50)->create();
+        OfficeClerk::factory(5)->create();
+        Task::factory(5)->create();
 
         User::factory()->create([
             'name' => 'Test User',

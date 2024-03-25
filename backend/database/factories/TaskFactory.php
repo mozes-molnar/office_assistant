@@ -25,7 +25,7 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'office_clerk_id' => $this->faker->numberBetween(1, 50),
+            'office_clerk_id' => $this->faker->numberBetween(1, 5),
             'description' => $this->faker->sentence(),
         ];
     }
