@@ -4,6 +4,7 @@
 ### Backend
 ```sh
 git clone https://github.com/mozes-molnar/office_assistant.git
+cd office_assistant
 cd backend
 composer install
 Linux or Mac: cp .env.example .env Windows:copy .env.example .env
